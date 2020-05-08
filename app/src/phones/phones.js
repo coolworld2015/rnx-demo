@@ -16,8 +16,6 @@ import {
 import {AppContext, AppConfig} from '../app/app';
 import {useNavigation} from '@react-navigation/core';
 
-console.disableYellowBox = true;
-
 const Phones = ({navigation}) => {
     const {state, dispatch} = useContext(AppConfig);
     const [items, setItems] = useState([]);
@@ -90,7 +88,7 @@ const Phones = ({navigation}) => {
 
     if (searchQuery.length > 0) {
         image = <Image
-            source={require('../../../img/cancel.png')}
+            source={require('../../img/cancel.png')}
             style={{
                 height: 20,
                 width: 20,
@@ -107,7 +105,7 @@ const Phones = ({navigation}) => {
                         <View>
                             <Image
                                 style={styles.menu}
-                                source={require('../../../img/menu.png')}
+                                source={require('../../img/menu.png')}
                             />
                         </View>
                     </TouchableWithoutFeedback>

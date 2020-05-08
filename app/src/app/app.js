@@ -119,7 +119,7 @@ const App = () => {
 
                                 if (route.name === 'Phones') {
                                     iconName = <Image
-                                        source={require('../../../img/phones.png')}
+                                        source={require('../../img/phones.png')}
                                         style={{
                                             height: 15,
                                             width: 15,
@@ -129,7 +129,7 @@ const App = () => {
                                 }
                                 if (route.name === 'Settings') {
                                     iconName = <Image
-                                        source={require('../../../img/users.png')}
+                                        source={require('../../img/users.png')}
                                         style={{
                                             height: 20,
                                             width: 20,
