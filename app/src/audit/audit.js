@@ -16,7 +16,7 @@ import {
 import {AppContext, AppConfig} from '../app/appContainer';
 import {useNavigation} from '@react-navigation/core';
 
-const Phones = ({navigation}) => {
+const Audit = ({navigation}) => {
     const {state, dispatch} = useContext(AppConfig);
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
@@ -30,9 +30,17 @@ const Phones = ({navigation}) => {
     }, []);
 
     const getItems = () => {
-        fetch('http://ui-base.herokuapp.com/api/items/get')
+        fetch(appConfig.url + 'api/audit/get', {
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': appConfig.access_token,
+            }
+        })
             .then((response) => response.json())
             .then(items => {
+                console.log('items ', items);
                 setItems(items);
                 setFilteredItems(items);
                 setRecords(items.length);
@@ -56,7 +64,7 @@ const Phones = ({navigation}) => {
     const onChangeText = (text) => {
         let arr = [].concat(filteredItems);
 
-        let filteredItems1 = arr.filter((el) => el.phone.toLowerCase().indexOf(text.toLowerCase()) !== -1);
+        let filteredItems1 = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) !== -1);
         setItems(filteredItems1);
         setRecords(filteredItems1.length);
         setSearchQuery(text);
@@ -114,7 +122,7 @@ const Phones = ({navigation}) => {
                     <TouchableWithoutFeedback>
                         <View>
                             <Text style={styles.textLarge}>
-                                Phones
+                                Audit
                             </Text>
                         </View>
                     </TouchableWithoutFeedback>
@@ -314,4 +322,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Phones;
+export default Audit;
