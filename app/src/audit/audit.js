@@ -40,7 +40,6 @@ const Audit = ({navigation}) => {
         })
             .then((response) => response.json())
             .then(items => {
-                console.log('items ', items);
                 setItems(items);
                 setFilteredItems(items);
                 setRecords(items.length);
