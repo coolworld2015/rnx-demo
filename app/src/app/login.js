@@ -14,6 +14,8 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 
+import {reducer} from './appContainer';
+
 class Login extends Component {
     constructor(props) {
         super(props);

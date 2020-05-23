@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useReducer} from 'react';
 import {
     StyleSheet,
     Text,
@@ -27,9 +27,19 @@ const Phones = ({navigation}) => {
 
     useEffect(() => {
         getItems();
+        setKey();
     }, []);
 
+    const getKey = () => {
+        console.log('Key....... ', state.key)
+    };
+
+    const setKey = () => {
+        dispatch({type: 'SET_KEY', data: appConfig.access_token});
+    };
+
     const getItems = () => {
+        getKey();
         fetch('http://ui-base.herokuapp.com/api/items/get')
             .then((response) => response.json())
             .then(items => {

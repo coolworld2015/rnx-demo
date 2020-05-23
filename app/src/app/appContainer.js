@@ -21,12 +21,17 @@ const initialState = {
     counter: 0,
 };
 
-const reducer = (state = {}, action) => {
+export const reducer = (state = {}, action) => {
     switch (action.type) {
         case 'ADD_METHOD':
             return {
                 ...state,
                 method: action.data,
+            };
+        case 'SET_KEY':
+            return {
+                ...state,
+                key: action.data,
             };
         case 'INCREASE_COUNTER':
             return {
