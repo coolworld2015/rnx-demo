@@ -162,8 +162,8 @@ const App = () => {
                             },
                         })}
                     >
-                        <Tab.Screen name="Audit" component={AuditStackScreen}/>
                         <Tab.Screen name={name} component={PhonesStackScreen}/>
+                        <Tab.Screen name="Audit" component={AuditStackScreen}/>
                         <Tab.Screen name="Quit" component={LogOut}/>
                     </Tab.Navigator>
                 </NavigationContainer>

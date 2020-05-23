@@ -30,12 +30,13 @@ const Audit = ({navigation}) => {
     }, []);
 
     const getItems = () => {
+        console.log('Key....... ', state.key);
         fetch(appConfig.url + 'api/audit/get', {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': appConfig.access_token,
+                'Authorization': state.key,
             }
         })
             .then((response) => response.json())

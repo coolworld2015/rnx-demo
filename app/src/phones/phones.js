@@ -30,16 +30,11 @@ const Phones = ({navigation}) => {
         setKey();
     }, []);
 
-    const getKey = () => {
-        console.log('Key....... ', state.key)
-    };
-
     const setKey = () => {
         dispatch({type: 'SET_KEY', data: appConfig.access_token});
     };
 
     const getItems = () => {
-        getKey();
         fetch('http://ui-base.herokuapp.com/api/items/get')
             .then((response) => response.json())
             .then(items => {
