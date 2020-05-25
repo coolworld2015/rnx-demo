@@ -20,6 +20,8 @@ const Login = () => {
     const {state, dispatch} = useContext(AppConfig);
     const [showProgress, setShowProgress] = useState(false);
     const [badCredentials, setBadCredentials] = useState(false);
+    const [name, setName] = useState('ed');
+    const [pass, setPass] = useState('1314');
 
     const width = Dimensions.get('window').width;
 
@@ -31,8 +33,44 @@ const Login = () => {
     }
 
     const onLogin = () => {
-        dispatch({type: 'SET_IS_LOGGED_IN'});
-        console.log('State........ ', state);
+        if (name === undefined || name === '' ||
+            pass === undefined || pass === '') {
+            setBadCredentials(true);
+            return;
+        }
+
+        setShowProgress(true);
+
+        fetch(state.url + 'api/login', {
+            method: 'post',
+            body: JSON.stringify({
+                name,
+                pass,
+                description: 'Android',
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((responseData) => {
+                console.log('SET_TOKEN ', responseData);
+                if (responseData.token) {
+                    dispatch({type: 'SET_TOKEN', data: responseData.token});
+                    setBadCredentials(false);
+                    dispatch({type: 'SET_IS_LOGGED_IN'});
+                } else {
+                    this.setState({
+                        badCredentials: true,
+                        showProgress: false,
+                    });
+                }
+            })
+            .catch(() => {
+                setBadCredentials(true);
+                setShowProgress(false);
+            });
     };
 
     return (
@@ -52,10 +90,10 @@ const Login = () => {
 
                     <TextInput
                         underlineColorAndroid='rgba(0,0,0,0)'
-                        /*onChangeText={(text) => this.setState({
-                            username: text,
-                            badCredentials: false
-                        })}*/
+                        onChangeText={(text) => {
+                            setName(text);
+                            setBadCredentials(false);
+                        }}
                         style={{
                             height: 50,
                             width: width * .90,
@@ -68,16 +106,16 @@ const Login = () => {
                             color: 'black',
                             backgroundColor: 'white',
                         }}
-                        //value={this.state.username}
+                        value={name}
                         placeholder='Login'>
                     </TextInput>
 
                     <TextInput
                         underlineColorAndroid='rgba(0,0,0,0)'
-                        /*onChangeText={(text) => this.setState({
-                            password: text,
-                            badCredentials: false
-                        })}*/
+                        onChangeText={(text) => {
+                            setPass(text);
+                            setBadCredentials(false);
+                        }}
                         style={{
                             height: 50,
                             width: width * .90,
@@ -90,7 +128,7 @@ const Login = () => {
                             color: 'black',
                             backgroundColor: 'white',
                         }}
-                        //value={this.state.password}
+                        value={pass}
                         placeholder='Password'
                         secureTextEntry={true}>
                     </TextInput>
