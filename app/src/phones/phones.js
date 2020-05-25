@@ -17,7 +17,7 @@ import {AppConfig} from '../app/app';
 import {useNavigation} from '@react-navigation/core';
 
 const Phones = ({navigation}) => {
-    const {state, dispatch} = useContext(AppConfig);
+    const {dispatch} = useContext(AppConfig);
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const [records, setRecords] = useState(0);
@@ -27,12 +27,7 @@ const Phones = ({navigation}) => {
 
     useEffect(() => {
         getItems();
-        setKey();
     }, []);
-
-    const setKey = () => {
-        dispatch({type: 'SET_TOKEN', data: appConfig.access_token});
-    };
 
     const getItems = () => {
         fetch('http://ui-base.herokuapp.com/api/items/get')

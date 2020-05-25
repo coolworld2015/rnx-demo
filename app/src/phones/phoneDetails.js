@@ -9,12 +9,12 @@ import {
     TouchableWithoutFeedback,
     ScrollView,
 } from 'react-native';
-import {AppContext} from '../app/appContainer';
+
 import {useNavigation} from '@react-navigation/core';
 import {AppConfig} from '../app/app';
 
 const PhoneDetails = () => {
-    const {state, dispatch} = useContext(AppConfig);
+    const {state} = useContext(AppConfig);
     const navigation = useNavigation();
 
     const goBack = () => {

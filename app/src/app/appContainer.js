@@ -18,41 +18,6 @@ import PhonesDetails from '../phones/phoneDetails';
 import Audit from '../audit/audit';
 import AuditDetails from '../audit/auditDetails';
 
-/*const initialState = {
-    method: () => null,
-    counter: 0,
-};
-
-export const reducer = (state = {}, action) => {
-    switch (action.type) {
-        case 'ADD_METHOD':
-            return {
-                ...state,
-                method: action.data,
-            };
-        case 'SET_TOKEN':
-            return {
-                ...state,
-                key: action.data,
-            };
-        case 'INCREASE_COUNTER':
-            return {
-                ...state,
-                counter: state.counter + 1,
-            };
-        case 'DECREASE_COUNTER':
-            return {
-                ...state,
-                counter: state.counter - 1,
-            };
-        default:
-            return state;
-    }
-};
-
-export const AppConfig = React.createContext();
-export const AppContext = React.createContext();*/
-
 const LogOut = () => {
     const {dispatch} = useContext(AppConfig);
     dispatch({type: 'SET_IS_LOGGED_OUT'});
@@ -75,8 +40,8 @@ const AuditStack = createStackNavigator();
 const AuditStackScreen = () => {
     return (
         <PhonesStack.Navigator headerMode={'none'}>
-            <PhonesStack.Screen name="Audit" component={Audit} options={{title: ''}}/>
-            <PhonesStack.Screen name="Details" component={AuditDetails} options={{title: '', headerLeft: null}}/>
+            <AuditStack.Screen name="Audit" component={Audit} options={{title: ''}}/>
+            <AuditStack.Screen name="Details" component={AuditDetails} options={{title: '', headerLeft: null}}/>
         </PhonesStack.Navigator>
     );
 };
