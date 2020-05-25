@@ -9,17 +9,18 @@ import {
     TouchableWithoutFeedback,
     ScrollView,
 } from 'react-native';
-import {AppContext} from '../app/appContainer';
+
 import {useNavigation} from '@react-navigation/core';
+import {AppConfig} from '../app/app';
 
 const PhoneDetails = () => {
-    const {item} = useContext(AppContext);
+    const {state} = useContext(AppConfig);
     const navigation = useNavigation();
 
     const goBack = () => {
         navigation.goBack();
     };
-
+console.log(state.item.data.item)
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -38,7 +39,7 @@ const PhoneDetails = () => {
                     <TouchableWithoutFeedback>
                         <View>
                             <Text style={styles.textLarge}>
-                                {item.data.item.name}
+                                {state.item.data.item.name}
                             </Text>
                         </View>
                     </TouchableWithoutFeedback>
@@ -57,66 +58,44 @@ const PhoneDetails = () => {
                 <View style={styles.form}>
                     <View style={styles.itemBlock}>
                         <Text style={styles.itemTextBold}>
-                            Name:
+                            Login:
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.name}
+                                {state.item.data.item.name}
                             </Text>
                         </View>
                     </View>
 
                     <View style={styles.itemBlock}>
                         <Text style={styles.itemTextBold}>
-                            Phone:
+                            Date:
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.phone}
+                                {state.item.data.item.date}
                             </Text>
                         </View>
                     </View>
 
                     <View style={styles.itemBlock}>
                         <Text style={styles.itemTextBold}>
-                            Street:
+                            IP:
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.street}
+                                {state.item.data.item.ip.split(':')[3]}
                             </Text>
                         </View>
                     </View>
 
                     <View style={styles.itemBlock}>
                         <Text style={styles.itemTextBold}>
-                            House:
+                            Description:
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.house}
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.itemBlock}>
-                        <Text style={styles.itemTextBold}>
-                            Apt:
-                        </Text>
-                        <View style={styles.itemWrap}>
-                            <Text style={styles.itemText}>
-                                {item.data.item.apt}
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.itemBlock}>
-                        <Text style={styles.itemTextBold}>
-                            Zip:
-                        </Text>
-                        <View style={styles.itemWrap}>
-                            <Text style={styles.itemText}>
-                                {item.data.item.index}
+                                {state.item.data.item.description}
                             </Text>
                         </View>
                     </View>
@@ -127,7 +106,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.id}
+                                {state.item.data.item.id}
                             </Text>
                         </View>
                     </View>
