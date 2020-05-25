@@ -51,7 +51,7 @@ const Tab = Platform.select({
     android: () => createMaterialTopTabNavigator(),
 })();
 
-const App = () => {
+const AppContainer = () => {
     const tabBarOptions = {
         style: {
             backgroundColor: 'white',
@@ -62,6 +62,7 @@ const App = () => {
         },
         upperCaseLabel: false,
         indicatorStyle: {backgroundColor: 'darkblue'},
+        //activeBackgroundColor: 'darkblue',
     };
 
     const name = 'Phones';
@@ -96,12 +97,33 @@ const App = () => {
                                 }}
                             />;
                         }
+                        if (route.name === 'Phones' && focused) {
+                            iconName = <Image
+                                source={require('../../img/phones-solid.png')}
+                                style={{
+                                    height: 35,
+                                    width: 25,
+                                    margin: 0,
+                                }}
+                            />;
+                        }
+
                         if (route.name === 'Audit') {
                             iconName = <Image
                                 source={require('../../img/clock.png')}
                                 style={{
                                     height: 20,
                                     width: 20,
+                                    margin: 0,
+                                }}
+                            />;
+                        }
+                        if (route.name === 'Audit' && focused) {
+                            iconName = <Image
+                                source={require('../../img/clock.png')}
+                                style={{
+                                    height: 35,
+                                    width: 25,
                                     margin: 0,
                                 }}
                             />;
@@ -129,4 +151,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AppContainer;
