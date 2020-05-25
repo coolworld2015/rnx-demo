@@ -12,6 +12,8 @@ import {Image, Platform} from 'react-native';
 
 import {AppConfig} from './app';
 
+import Photos from '../photos/photos';
+
 import Phones from '../phones/phones';
 import PhonesDetails from '../phones/phoneDetails';
 
@@ -87,6 +89,27 @@ const AppContainer = () => {
                     tabBarIcon: ({focused, color, size}) => {
                         let iconName;
 
+                        if (route.name === 'Photos') {
+                            iconName = <Image
+                                source={require('../../img/images.png')}
+                                style={{
+                                    height: 15,
+                                    width: 15,
+                                    margin: 0,
+                                }}
+                            />;
+                        }
+                        if (route.name === 'Photos' && focused) {
+                            iconName = <Image
+                                source={require('../../img/images.png')}
+                                style={{
+                                    height: 35,
+                                    width: 35,
+                                    margin: 0,
+                                }}
+                            />;
+                        }
+
                         if (route.name === 'Phones') {
                             iconName = <Image
                                 source={require('../../img/phones.png')}
@@ -99,10 +122,10 @@ const AppContainer = () => {
                         }
                         if (route.name === 'Phones' && focused) {
                             iconName = <Image
-                                source={require('../../img/phones-solid.png')}
+                                source={require('../../img/phones.png')}
                                 style={{
-                                    height: 35,
-                                    width: 25,
+                                    height: 30,
+                                    width: 30,
                                     margin: 0,
                                 }}
                             />;
@@ -123,7 +146,7 @@ const AppContainer = () => {
                                 source={require('../../img/clock.png')}
                                 style={{
                                     height: 35,
-                                    width: 25,
+                                    width: 35,
                                     margin: 0,
                                 }}
                             />;
@@ -143,6 +166,7 @@ const AppContainer = () => {
                     },
                 })}
             >
+                <Tab.Screen name="Photos" component={Photos}/>
                 <Tab.Screen name={name} component={PhonesStackScreen}/>
                 <Tab.Screen name="Audit" component={AuditStackScreen}/>
                 <Tab.Screen name="Quit" component={LogOut}/>
