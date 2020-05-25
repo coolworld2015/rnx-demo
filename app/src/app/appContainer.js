@@ -28,7 +28,7 @@ export const reducer = (state = {}, action) => {
                 ...state,
                 method: action.data,
             };
-        case 'SET_KEY':
+        case 'SET_TOKEN':
             return {
                 ...state,
                 key: action.data,

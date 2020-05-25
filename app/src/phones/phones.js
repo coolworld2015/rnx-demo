@@ -31,7 +31,7 @@ const Phones = ({navigation}) => {
     }, []);
 
     const setKey = () => {
-        dispatch({type: 'SET_KEY', data: appConfig.access_token});
+        dispatch({type: 'SET_TOKEN', data: appConfig.access_token});
     };
 
     const getItems = () => {

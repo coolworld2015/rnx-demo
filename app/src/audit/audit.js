@@ -37,11 +37,11 @@ const Audit = ({navigation}) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': state.key,
-            }
+            },
         })
             .then((response) => response.json())
             .then(items => {
-                setItems(items);
+                setItems(items.sort(sort));
                 setFilteredItems(items);
                 setRecords(items.length);
                 setShowProgress(false);
@@ -51,6 +51,17 @@ const Audit = ({navigation}) => {
                 setShowProgress(false);
                 setServerError(true);
             });
+    };
+
+    const sort = (a, b) => {
+        let nameA = a.id, nameB = b.id;
+        if (nameA > nameB) {
+            return -1;
+        }
+        if (nameA < nameB) {
+            return 1;
+        }
+        return 0;
     };
 
     const refreshData = () => {
@@ -171,7 +182,7 @@ const Audit = ({navigation}) => {
                     <Item
                         id={item.id}
                         name={item.name}
-                        phone={item.phone}
+                        date={item.date}
                         data={{item}}
                         navigation={navigation}
                     />
@@ -214,7 +225,7 @@ const Item = (props) => {
             underlayColor='#ddd'>
             <View style={styles.row}>
                 <Text style={styles.rowText}>
-                    {props.name} - {props.phone}
+                    {props.name} - {props.date}
                 </Text>
             </View>
         </TouchableHighlight>
