@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {useContext, useEffect, useState, useReducer} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
     StyleSheet,
     Text,
@@ -13,7 +13,7 @@ import {
     Dimensions, FlatList, RefreshControl,
 } from 'react-native';
 
-import {AppContext, AppConfig} from '../app/appContainer';
+import {AppConfig} from '../app/app';
 import {useNavigation} from '@react-navigation/core';
 
 const Phones = ({navigation}) => {
@@ -197,21 +197,21 @@ const Phones = ({navigation}) => {
     );
 };
 
-const Item = (props) => {
-    const {item, setContextItem} = useContext(AppContext);
+const Item = (item) => {
+    const {dispatch} = useContext(AppConfig);
     const navigation = useNavigation();
 
     return (
         <TouchableHighlight
             onPress={() => {
-                setContextItem(props);
+                dispatch({type: 'SET_ITEM', data: item});
                 navigation.navigate('Details');
             }
             }
             underlayColor='#ddd'>
             <View style={styles.row}>
                 <Text style={styles.rowText}>
-                    {props.name} - {props.phone}
+                    {item.name} - {item.phone}
                 </Text>
             </View>
         </TouchableHighlight>

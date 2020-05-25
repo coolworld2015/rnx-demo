@@ -23,8 +23,6 @@ const Login = () => {
 
     const width = Dimensions.get('window').width;
 
-    console.log('State... ', state)
-
     let errorCtrl;
     if (badCredentials) {
         errorCtrl = <Text style={styles.error}>
@@ -33,7 +31,8 @@ const Login = () => {
     }
 
     const onLogin = () => {
-        dispatch({type: 'SET_IS_LOGGED_IN'})
+        dispatch({type: 'SET_IS_LOGGED_IN'});
+        console.log('State........ ', state);
     };
 
     return (

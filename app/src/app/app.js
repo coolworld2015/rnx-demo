@@ -20,7 +20,7 @@ export const reducer = (state = {}, action) => {
         case 'SET_TOKEN':
             return {
                 ...state,
-                key: action.data,
+                token: action.data,
             };
         case 'SET_IS_LOGGED_IN':
             return {
@@ -32,6 +32,11 @@ export const reducer = (state = {}, action) => {
                 ...state,
                 isLoggedIn: false,
             };
+            case 'SET_ITEM':
+            return {
+                ...state,
+                item: action.data,
+            };
         default:
             return state;
     }
@@ -41,8 +46,6 @@ export const AppConfig = React.createContext();
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [showProgress, setShowProgress] = useState(false);
 
     window.appConfig = {
         access_token: '',
@@ -71,20 +74,12 @@ const App = () => {
         },
     };
 
-    let container;
-    if (state.isLoggedIn) {
-        container =  <AppContainer/>
-        console.log('State........ ', state);
-    } else {
-        container = <Login/>
-        console.log('State........ ', state);
-    }
-
     return (
         <AppConfig.Provider value={{state, dispatch}}>
-
-            {container}
-
+            {state.isLoggedIn
+                ? <AppContainer/>
+                : <Login/>
+            }
         </AppConfig.Provider>
     );
 

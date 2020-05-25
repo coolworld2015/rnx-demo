@@ -11,9 +11,10 @@ import {
 } from 'react-native';
 import {AppContext} from '../app/appContainer';
 import {useNavigation} from '@react-navigation/core';
+import {AppConfig} from '../app/app';
 
 const PhoneDetails = () => {
-    const {item} = useContext(AppContext);
+    const {state, dispatch} = useContext(AppConfig);
     const navigation = useNavigation();
 
     const goBack = () => {
@@ -38,7 +39,7 @@ const PhoneDetails = () => {
                     <TouchableWithoutFeedback>
                         <View>
                             <Text style={styles.textLarge}>
-                                {item.data.item.name}
+                                {state.item.name}
                             </Text>
                         </View>
                     </TouchableWithoutFeedback>
@@ -61,7 +62,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.name}
+                                {state.item.name}
                             </Text>
                         </View>
                     </View>
@@ -72,7 +73,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.phone}
+                                {state.item.phone}
                             </Text>
                         </View>
                     </View>
@@ -83,7 +84,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.street}
+                                {state.item.data.item.street}
                             </Text>
                         </View>
                     </View>
@@ -94,7 +95,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.house}
+                                {state.item.data.item.house}
                             </Text>
                         </View>
                     </View>
@@ -105,7 +106,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.apt}
+                                {state.item.data.item.apt}
                             </Text>
                         </View>
                     </View>
@@ -116,7 +117,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.index}
+                                {state.item.data.item.index}
                             </Text>
                         </View>
                     </View>
@@ -127,7 +128,7 @@ const PhoneDetails = () => {
                         </Text>
                         <View style={styles.itemWrap}>
                             <Text style={styles.itemText}>
-                                {item.data.item.id}
+                                {state.item.data.item.id}
                             </Text>
                         </View>
                     </View>
