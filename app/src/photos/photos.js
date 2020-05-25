@@ -2,15 +2,17 @@
 
 import React, {useContext, useEffect, useState} from 'react';
 import {
+    ActivityIndicator,
+    Dimensions,
+    FlatList,
+    Image,
+    RefreshControl,
     StyleSheet,
     Text,
-    View,
+    TextInput,
     TouchableHighlight,
     TouchableWithoutFeedback,
-    ActivityIndicator,
-    TextInput,
-    Image,
-    Dimensions, FlatList, RefreshControl,
+    View,
 } from 'react-native';
 
 import {AppConfig} from '../app/app';
@@ -208,8 +210,7 @@ const timeConverter = (UNIX_timestamp) => {
     let hour = a.getHours() < 10 ? '0' + a.getHours() : a.getHours();
     let min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
     let sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-    let time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
+    return date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
 };
 
 const Item = (item) => {
