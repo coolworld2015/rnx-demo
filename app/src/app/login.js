@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
     StyleSheet,
     Text,
@@ -16,7 +16,104 @@ import {
 
 import {reducer} from './appContainer';
 
-class Login extends Component {
+const Login = () => {
+    const [showProgress, setShowProgress] = useState(false);
+    const [badCredentials, setBadCredentials] = useState(false);
+
+    const width = Dimensions.get('window').width;
+
+    let errorCtrl;
+
+    if (badCredentials) {
+        errorCtrl = <Text style={styles.error}>
+            That username and password combination did not work
+        </Text>;
+    }
+
+    return (
+        <ScrollView style={{backgroundColor: 'whitesmoke'}} keyboardShouldPersistTaps='always'>
+            <KeyboardAvoidingView behavior="padding" enabled>
+                <View style={styles.container}>
+
+                    <View style={styles.headerContainer}>
+                        <Text style={styles.heading}>
+                            RN-Demo
+                        </Text>
+                    </View>
+
+                    <Image style={styles.logo}
+                           source={require('../../img/logo.jpg')}
+                    />
+
+                    <TextInput
+                        underlineColorAndroid='rgba(0,0,0,0)'
+                        /*onChangeText={(text) => this.setState({
+                            username: text,
+                            badCredentials: false
+                        })}*/
+                        style={{
+                            height: 50,
+                            width: width * .90,
+                            marginTop: 10,
+                            padding: 4,
+                            fontSize: 18,
+                            borderWidth: 1,
+                            borderColor: 'lightgray',
+                            borderRadius: 5,
+                            color: 'black',
+                            backgroundColor: 'white'
+                        }}
+                        //value={this.state.username}
+                        placeholder='Login'>
+                    </TextInput>
+
+                    <TextInput
+                        underlineColorAndroid='rgba(0,0,0,0)'
+                        /*onChangeText={(text) => this.setState({
+                            password: text,
+                            badCredentials: false
+                        })}*/
+                        style={{
+                            height: 50,
+                            width: width * .90,
+                            marginTop: 10,
+                            padding: 4,
+                            fontSize: 18,
+                            borderWidth: 1,
+                            borderColor: 'lightgray',
+                            borderRadius: 5,
+                            color: 'black',
+                            backgroundColor: 'white'
+                        }}
+                        //value={this.state.password}
+                        placeholder='Password'
+                        secureTextEntry={true}>
+                    </TextInput>
+
+                    <TouchableHighlight
+                        //onPress={() => this.onLogin()}
+                        style={styles.button}>
+                        <Text style={styles.buttonText}>
+                            Log in
+                        </Text>
+                    </TouchableHighlight>
+
+                    {errorCtrl}
+
+                    <ActivityIndicator
+                        animating={showProgress}
+                        size="large"
+                        color="darkblue"
+                        style={styles.loader}
+                    />
+
+                </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
+    )
+};
+
+/*class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -187,7 +284,7 @@ class Login extends Component {
     onLoginPressed() {
         this.props.onLogin();
     }
-}
+}*/
 
 const styles = StyleSheet.create({
     container: {
