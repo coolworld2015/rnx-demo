@@ -225,14 +225,14 @@ const Item = (item) => {
             }
             }
             underlayColor='#ddd'>
-            <View style1={styles.row}>
+            <View style={styles.row}>
                 <Text style={styles.rowText}>
                     {timeConverter(item.name)}
                 </Text>
                 <Image
                     style={{
                         width: 300,
-                        height: 100,
+                        height: 200,
                     }}
                     source={{ uri: item.image }}
                 />
@@ -305,8 +305,8 @@ const styles = StyleSheet.create({
     },
     row: {
         flex: 1,
-        flexDirection: 'row',
-        padding: 20,
+        //flexDirection: 'row',
+        padding: 10,
         alignItems: 'center',
         borderColor: '#D7D7D7',
         borderBottomWidth: 1,
