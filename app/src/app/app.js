@@ -71,16 +71,23 @@ const App = () => {
         },
     };
 
+    let container;
     if (state.isLoggedIn) {
-        return (
-            <AppContainer/>
-        );
-
+        container =  <AppContainer/>
+        console.log('State........ ', state);
     } else {
-        return (
-            <Login/>
-        );
+        container = <Login/>
+        console.log('State........ ', state);
     }
+
+    return (
+        <AppConfig.Provider value={{state, dispatch}}>
+
+            {container}
+
+        </AppConfig.Provider>
+    );
+
 };
 
 /*class App extends Component {

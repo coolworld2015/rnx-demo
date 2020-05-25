@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
     StyleSheet,
     Text,
@@ -11,24 +11,30 @@ import {
     ActivityIndicator,
     TextInput,
     Dimensions,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
 } from 'react-native';
 
-import {reducer} from './appContainer';
+import {AppConfig} from './app';
 
 const Login = () => {
+    const {state, dispatch} = useContext(AppConfig);
     const [showProgress, setShowProgress] = useState(false);
     const [badCredentials, setBadCredentials] = useState(false);
 
     const width = Dimensions.get('window').width;
 
-    let errorCtrl;
+    console.log('State... ', state)
 
+    let errorCtrl;
     if (badCredentials) {
         errorCtrl = <Text style={styles.error}>
             That username and password combination did not work
         </Text>;
     }
+
+    const onLogin = () => {
+        dispatch({type: 'SET_IS_LOGGED_IN'})
+    };
 
     return (
         <ScrollView style={{backgroundColor: 'whitesmoke'}} keyboardShouldPersistTaps='always'>
@@ -61,7 +67,7 @@ const Login = () => {
                             borderColor: 'lightgray',
                             borderRadius: 5,
                             color: 'black',
-                            backgroundColor: 'white'
+                            backgroundColor: 'white',
                         }}
                         //value={this.state.username}
                         placeholder='Login'>
@@ -83,7 +89,7 @@ const Login = () => {
                             borderColor: 'lightgray',
                             borderRadius: 5,
                             color: 'black',
-                            backgroundColor: 'white'
+                            backgroundColor: 'white',
                         }}
                         //value={this.state.password}
                         placeholder='Password'
@@ -91,7 +97,7 @@ const Login = () => {
                     </TextInput>
 
                     <TouchableHighlight
-                        //onPress={() => this.onLogin()}
+                        onPress={() => onLogin()}
                         style={styles.button}>
                         <Text style={styles.buttonText}>
                             Log in
@@ -110,7 +116,7 @@ const Login = () => {
                 </View>
             </KeyboardAvoidingView>
         </ScrollView>
-    )
+    );
 };
 
 /*class Login extends Component {
@@ -292,27 +298,27 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         flex: 1,
-        marginTop: 50
+        marginTop: 50,
     },
     logo: {
         width: 150,
         height: 150,
         paddingTop: 140,
         borderRadius: 20,
-		marginBottom: 10
+        marginBottom: 10,
     },
     headerContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-		marginBottom: 10,
-		marginTop: -10
+        marginBottom: 10,
+        marginTop: -10,
     },
     heading: {
         fontSize: 30,
         marginTop: 10,
         color: 'navy',
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     button: {
         height: 50,
@@ -324,21 +330,21 @@ const styles = StyleSheet.create({
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 5
+        borderRadius: 5,
     },
     buttonText: {
         color: '#fff',
         fontSize: 24,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     loader: {
-        marginTop: 40
+        marginTop: 40,
     },
     error: {
         color: 'red',
         paddingTop: 10,
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+    },
 });
 
 export default Login;
