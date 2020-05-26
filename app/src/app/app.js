@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {useState, useReducer} from 'react';
+import React, {useReducer} from 'react';
 
 import Login from './login';
 import AppContainer from './appContainer';
