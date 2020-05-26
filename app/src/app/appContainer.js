@@ -41,10 +41,10 @@ const AuditStack = createStackNavigator();
 
 const AuditStackScreen = () => {
     return (
-        <PhonesStack.Navigator headerMode={'none'}>
+        <AuditStack.Navigator headerMode={'none'}>
             <AuditStack.Screen name="Audit" component={Audit} options={{title: ''}}/>
             <AuditStack.Screen name="Details" component={AuditDetails} options={{title: '', headerLeft: null}}/>
-        </PhonesStack.Navigator>
+        </AuditStack.Navigator>
     );
 };
 
