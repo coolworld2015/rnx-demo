@@ -35,7 +35,7 @@ const Photos = ({navigation}) => {
     const getItems = () => {
         CameraRoll.getPhotos({
             first: 2000,
-            assetType: 'Photos',
+            assetType: 'All',
         })
             .then(items => {
                 console.log(items.edges)
@@ -43,9 +43,6 @@ const Photos = ({navigation}) => {
                 setFilteredItems(items.edges);
                 setRecords(items.edges.length);
                 setShowProgress(false);
-
-                //this.setState({ photos: r.edges });
-
             })
             .catch((err) => {
                 console.log('error ', error);
