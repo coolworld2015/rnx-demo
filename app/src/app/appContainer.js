@@ -93,8 +93,8 @@ const AppContainer = () => {
                             iconName = <Image
                                 source={require('../../img/images.png')}
                                 style={{
-                                    height: 15,
-                                    width: 15,
+                                    height: 20,
+                                    width: 20,
                                     margin: 0,
                                 }}
                             />;

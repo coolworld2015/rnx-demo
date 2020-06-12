@@ -13,6 +13,8 @@ import {
     TouchableHighlight,
     TouchableWithoutFeedback,
     View,
+    Platform,
+    PermissionsAndroid,
 } from 'react-native';
 
 import {AppConfig} from '../app/app';
@@ -29,8 +31,28 @@ const Photos = ({navigation}) => {
     const [showProgress, setShowProgress] = useState(true);
 
     useEffect(() => {
-        getItems();
+        if (Platform.OS === 'android') {
+            console.log('Android');
+            requestPhotosPermission()
+        } else {
+            console.log('ios');
+            getItems();
+        }
     }, []);
+
+    const requestPhotosPermission = () => {
+        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE).then((result) => {
+            if (result === PermissionsAndroid.RESULTS.GRANTED) {
+                getItems();
+                console.log('Photos permission GRANTED');
+            } else {
+                console.log('Photos permission denied');
+            }
+        })
+            .catch((err) => {
+                console.log('error ', error);
+            })
+    };
 
     const getItems = () => {
         CameraRoll.getPhotos({
@@ -38,7 +60,7 @@ const Photos = ({navigation}) => {
             assetType: 'All',
         })
             .then(items => {
-                console.log(items.edges)
+                console.log(items.edges);
                 setItems(items.edges);
                 setFilteredItems(items.edges);
                 setRecords(items.edges.length);
@@ -200,7 +222,7 @@ const Photos = ({navigation}) => {
 
 const timeConverter = (UNIX_timestamp) => {
     let a = new Date(UNIX_timestamp * 1000);
-    let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     let year = a.getFullYear();
     let month = months[a.getMonth()];
     let date = a.getDate();
@@ -231,7 +253,7 @@ const Item = (item) => {
                         width: 300,
                         height: 200,
                     }}
-                    source={{ uri: item.image }}
+                    source={{uri: item.image}}
                 />
             </View>
         </TouchableHighlight>
