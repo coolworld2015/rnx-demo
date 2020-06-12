@@ -1,12 +1,13 @@
 'use strict';
 
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {useNavigation} from '@react-navigation/core';
 
 import {Image, Platform} from 'react-native';
 
@@ -22,7 +23,18 @@ import AuditDetails from '../audit/auditDetails';
 
 const LogOut = () => {
     const {dispatch} = useContext(AppConfig);
-    dispatch({type: 'SET_IS_LOGGED_OUT'});
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        const didFocusListener = navigation.addListener(
+            'focus',
+            () => {
+                console.log('Focused on Quit')
+                dispatch({type: 'SET_IS_LOGGED_OUT'});
+            },
+        );
+    }, []);
+
     return null;
 };
 
